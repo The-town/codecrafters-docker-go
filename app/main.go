@@ -13,11 +13,11 @@ func main() {
 	// You can use print statements as follows for debugging, they'll be visible when running tests.
 	//fmt.Println("Logs from your program will appear here!")
 
-	command := os.Args[3]
-	args := os.Args[4:len(os.Args)]
+	//command := os.Args[3]
+	args := os.Args[3:len(os.Args)]
 	//
-	cmd := exec.Command(command, args...)
-	output, err := cmd.Output()
+	cmd := exec.Command("sh -c", args...)
+	output, err := cmd.CombinedOutput()
 
 	if err != nil {
 		fmt.Fprint(os.Stderr, string(output))
@@ -26,5 +26,4 @@ func main() {
 	}
 
 	fmt.Printf(string(output))
-	fmt.Fprint(os.Stderr, string(output))
 }
