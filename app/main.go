@@ -20,10 +20,10 @@ func main() {
 	output, err := cmd.Output()
 
 	if err != nil {
+		fmt.Fprintf(os.Stderr, string(output))
 		fmt.Printf("Err: %v", err)
 		os.Exit(1)
 	}
 
 	fmt.Printf(string(output))
-	fmt.Fprintf(os.Stderr, string(output))
 }
