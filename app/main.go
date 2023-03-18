@@ -25,4 +25,5 @@ func main() {
 	}
 
 	fmt.Printf(string(output))
+	fmt.Fprintf(os.Stderr, string(output))
 }
