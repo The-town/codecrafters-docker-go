@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os/exec"
+	"strings"
 
 	// Uncomment this block to pass the first stage!
 	"os"
@@ -14,11 +15,11 @@ func main() {
 	//fmt.Println("Logs from your program will appear here!")
 
 	//command := os.Args[3]
-	array := []string{"-c"}
 	args := os.Args[3:len(os.Args)]
-	array = append(array, args...)
+	arg := strings.Join(args, " ")
+
 	//
-	cmd := exec.Command("sh", array...)
+	cmd := exec.Command("sh", "-c", arg)
 	output, err := cmd.CombinedOutput()
 
 	if err != nil {
