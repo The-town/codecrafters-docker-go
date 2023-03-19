@@ -14,9 +14,11 @@ func main() {
 	//fmt.Println("Logs from your program will appear here!")
 
 	//command := os.Args[3]
+	array := []string{"-c"}
 	args := os.Args[3:len(os.Args)]
+	array = append(array, args...)
 	//
-	cmd := exec.Command("sh -c", args...)
+	cmd := exec.Command("sh", array...)
 	output, err := cmd.CombinedOutput()
 
 	if err != nil {
