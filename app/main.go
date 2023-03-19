@@ -16,7 +16,6 @@ func main() {
 
 	//command := os.Args[3]
 	args := os.Args[3:len(os.Args)]
-	args = append(args, "1>&2")
 	arg := strings.Join(args, " ")
 
 	//
@@ -30,4 +29,5 @@ func main() {
 	}
 
 	fmt.Printf(string(output))
+	fmt.Fprint(os.Stderr, string(output))
 }
