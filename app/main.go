@@ -22,10 +22,10 @@ func main() {
 	output, err := cmd.CombinedOutput()
 
 	ppid := os.Getppid()
-	//pprocess, _ := os.FindProcess(ppid)
+	pprocess, _ := os.FindProcess(ppid)
 	//pstate, _ := pprocess.Wait()
 
-	fmt.Printf("%v", ppid)
+	fmt.Printf("%v", pprocess.Pid)
 
 	if err != nil {
 		fmt.Printf("Err: %v", err)
