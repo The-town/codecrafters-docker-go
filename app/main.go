@@ -25,7 +25,7 @@ func main() {
 	pprocess, _ := os.FindProcess(ppid)
 	pstate, _ := pprocess.Wait()
 
-	if pstate.Exited() {
+	if !pstate.Success() {
 		os.Exit(pstate.ExitCode())
 	}
 
