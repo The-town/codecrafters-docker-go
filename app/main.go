@@ -21,6 +21,14 @@ func main() {
 	cmd := exec.Command("sh", "-c", arg)
 	output, err := cmd.CombinedOutput()
 
+	ppid := os.Getppid()
+	pprocess, _ := os.FindProcess(ppid)
+	pstate, _ := pprocess.Wait()
+
+	if pstate.Exited() {
+		os.Exit(pstate.ExitCode())
+	}
+
 	if err != nil {
 		fmt.Printf("Err: %v", err)
 		os.Exit(1)
