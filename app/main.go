@@ -14,7 +14,6 @@ func main() {
 	// You can use print statements as follows for debugging, they'll be visible when running tests.
 	//fmt.Println("Logs from your program will appear here!")
 
-	//command := os.Args[3]
 	args := os.Args[3:len(os.Args)]
 	arg := strings.Join(args, " ")
 
@@ -29,5 +28,4 @@ func main() {
 	}
 
 	fmt.Printf(string(output))
-	fmt.Fprint(os.Stderr, string(output))
 }
