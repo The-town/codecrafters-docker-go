@@ -19,9 +19,10 @@ func main() {
 
 	//
 	cmd := exec.Command("sh", "-c", arg)
-
+	fmt.Printf("%v", cmd.Process)
 	output, err := cmd.CombinedOutput()
 	process := cmd.Process
+	fmt.Printf("%v", cmd.Process)
 	process_state, _ := process.Wait()
 
 	if err != nil {
