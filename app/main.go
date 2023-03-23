@@ -21,11 +21,11 @@ func main() {
 	cmd := exec.Command("sh", "-c", arg)
 	output, err := cmd.CombinedOutput()
 
-	ppid := os.Getppid()
-	pprocess, _ := os.FindProcess(ppid)
+	pid := cmd.Process.Pid
+	process, _ := os.FindProcess(pid)
 	//pstate, _ := pprocess.Wait()
 
-	fmt.Printf("%v", pprocess.Pid)
+	fmt.Printf("%v", process.Pid)
 
 	if err != nil {
 		fmt.Printf("Err: %v", err)
