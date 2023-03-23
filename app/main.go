@@ -27,7 +27,8 @@ func main() {
 		fmt.Printf("Err: %v", err)
 
 		exit_code := process_state.ExitCode()
-		fmt.Print(exit_code)
+		fmt.Println(process_state.Exited())
+		fmt.Println(exit_code)
 		os.Exit(exit_code)
 	}
 
