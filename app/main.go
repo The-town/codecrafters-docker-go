@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os/exec"
-	"strings"
 
 	// Uncomment this block to pass the first stage!
 	"os"
@@ -14,15 +13,15 @@ func main() {
 	// You can use print statements as follows for debugging, they'll be visible when running tests.
 	//fmt.Println("Logs from your program will appear here!")
 
-	args := os.Args[3:len(os.Args)]
-	arg := strings.Join(args, " ")
+	command := os.Args[3]
+	args := os.Args[4:len(os.Args)]
+	// arg := strings.Join(args, " ")
 
 	//
-	cmd := exec.Command("sh", "-c", arg)
+	cmd := exec.Command(command, args...)
 	output, err := cmd.CombinedOutput()
 	process := cmd.Process
 	process_state, _ := process.Wait()
-	fmt.Println(process_state.Exited())
 
 	if err != nil {
 		fmt.Printf("Err: %v", err)
