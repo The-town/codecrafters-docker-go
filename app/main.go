@@ -26,9 +26,10 @@ func main() {
 
 	if err != nil {
 		fmt.Printf("Err: %v", err)
-
-		exit_code := cmd.ProcessState.ExitCode()
-		fmt.Println(exit_code)
-		os.Exit(exit_code)
+		os.Exit(1)
 	}
+
+	exit_code := cmd.ProcessState.ExitCode()
+	fmt.Println(exit_code)
+	os.Exit(exit_code)
 }
