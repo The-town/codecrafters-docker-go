@@ -21,9 +21,11 @@ func main() {
 	cmd := exec.Command(command, args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+
+	err := cmd.Start()
+
 	process := cmd.Process
 	process_state, _ := process.Wait()
-	err := cmd.Run()
 
 	if err != nil {
 		fmt.Printf("Err: %v", err)
