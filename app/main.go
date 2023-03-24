@@ -30,6 +30,5 @@ func main() {
 	}
 
 	exit_code := cmd.ProcessState.ExitCode()
-	fmt.Println(exit_code)
 	os.Exit(exit_code)
 }
