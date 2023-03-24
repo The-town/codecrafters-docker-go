@@ -21,10 +21,9 @@ func main() {
 	cmd := exec.Command(command, args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+	process := cmd.Process
 
 	err := cmd.Run()
-
-	process := cmd.Process
 	process_state, _ := process.Wait()
 
 	if err != nil {
