@@ -24,15 +24,10 @@ func main() {
 
 	err := cmd.Start()
 
-	process := cmd.Process
-	process_state, _ := process.Wait()
-
-	fmt.Println(cmd.Stderr)
-
 	if err != nil {
 		fmt.Printf("Err: %v", err)
 
-		exit_code := process_state.ExitCode()
+		exit_code := cmd.ProcessState.ExitCode()
 		fmt.Println(exit_code)
 		os.Exit(exit_code)
 	}
