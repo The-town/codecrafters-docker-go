@@ -19,7 +19,11 @@ func main() {
 
 	//
 	cmd := exec.Command(command, args...)
-	output, err := cmd.CombinedOutput()
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	err := cmd.Run()
+
 	process := cmd.Process
 	process_state, _ := process.Wait()
 
@@ -30,7 +34,4 @@ func main() {
 		fmt.Println(exit_code)
 		os.Exit(exit_code)
 	}
-
-	fmt.Printf(string(output))
-	fmt.Fprint(os.Stderr, string(output))
 }
