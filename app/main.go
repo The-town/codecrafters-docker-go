@@ -18,7 +18,7 @@ func main() {
 
 	chroot_path := "./tmp"
 
-	fmt.Printf("%v", dirwalk("/usr/bin"))
+	fmt.Printf("%v", dirwalk("/usr/local/bin"))
 
 	err := create_chroot_jail(chroot_path)
 	if err != nil {
