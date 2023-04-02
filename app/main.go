@@ -72,7 +72,7 @@ func create_chroot_jail(path string) error {
 
 func copy_docker_explore(chroot_path string) error {
 	src_path := "/usr/local/bin/docker-explorer"
-	dst_path := "./usr/local/bin/docker-explorer"
+	dst_path := "./docker-explorer"
 
 	src_file, err := os.Open(src_path)
 	if err != nil {
@@ -81,17 +81,20 @@ func copy_docker_explore(chroot_path string) error {
 
 	defer src_file.Close()
 
+	err = os.Chdir(chroot_path)
+	if err != nil {
+		return err
+	}
+
+	os.MkdirAll("./usr/local/bin", 0750)
+	os.Chdir("./usr/local/bin")
+
 	dst_file, err := os.Create(dst_path)
 	if err != nil {
 		return err
 	}
 
 	defer dst_file.Close()
-
-	err = os.Chdir(chroot_path)
-	if err != nil {
-		return err
-	}
 
 	_, err = io.Copy(dst_file, src_file)
 	if err != nil {
