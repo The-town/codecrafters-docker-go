@@ -89,10 +89,11 @@ func copy_docker_explore(chroot_path string) error {
 		return err
 	}
 
-	os.MkdirAll("./usr/local/bin", 0777)
+	os.MkdirAll("./usr/local/bin", 0750)
 	os.Chdir("./usr/local/bin")
 
 	dst_file, err := os.Create(dst_path)
+	os.Chmod(dst_path, 0777)
 	if err != nil {
 		return err
 	}
