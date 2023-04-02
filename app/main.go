@@ -19,6 +19,7 @@ func main() {
 	chroot_path := "./tmp"
 
 	wd, _ := os.Getwd()
+	fmt.Printf("CD: %v", wd)
 
 	os.MkdirAll(chroot_path, 0750)
 
