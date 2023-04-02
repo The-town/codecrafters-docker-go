@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"os/exec"
 
@@ -77,6 +78,7 @@ func copy_docker_explore(chroot_path string) error {
 
 	src_file, err := os.Open(src_path)
 	if err != nil {
+		log.Fatal("src file open error")
 		return err
 	}
 
