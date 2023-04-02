@@ -18,6 +18,8 @@ func main() {
 
 	chroot_path := "./tmp"
 
+	wd, _ := os.Getwd()
+
 	os.MkdirAll(chroot_path, 0750)
 
 	err := copy_docker_explore(chroot_path)
@@ -25,6 +27,8 @@ func main() {
 		fmt.Printf("Copy Docker Explore Error %v", err)
 		os.Exit(1)
 	}
+
+	os.Chdir(wd)
 
 	err = create_chroot_jail(chroot_path)
 	if err != nil {
