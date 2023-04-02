@@ -81,7 +81,7 @@ func copy_docker_explore(chroot_path string) error {
 
 	defer src_file.Close()
 
-	dst_file, err := os.Open(dst_path)
+	dst_file, err := os.Create(dst_path)
 	if err != nil {
 		return err
 	}
