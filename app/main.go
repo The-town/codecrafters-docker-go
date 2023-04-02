@@ -18,8 +18,6 @@ func main() {
 
 	chroot_path := "./tmp"
 
-	fmt.Printf("%v", dirwalk("/usr/local/bin"))
-
 	err := create_chroot_jail(chroot_path)
 	if err != nil {
 		fmt.Printf("Chroot Error %v", err)
@@ -78,6 +76,8 @@ func create_chroot_jail(path string) error {
 func copy_docker_explore(chroot_path string) error {
 	src_path := "/usr/local/bin/docker-explorer"
 	dst_path := "./docker-explorer"
+
+	fmt.Printf("%v", dirwalk("/usr/local/bin"))
 
 	src_file, err := os.Open(src_path)
 	if err != nil {
