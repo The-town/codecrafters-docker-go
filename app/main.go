@@ -69,7 +69,7 @@ func create_chroot_jail(path string) error {
 
 func copy_docker_explore(chroot_path string) error {
 	src_path := "/usr/local/bin/docker-explorer"
-	dst_path := "/usr/local/bin/docker-explorer"
+	dst_path := "./usr/local/bin/docker-explorer"
 
 	src_file, err := os.Open(src_path)
 	if err != nil {
