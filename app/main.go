@@ -16,10 +16,7 @@ func main() {
 	// You can use print statements as follows for debugging, they'll be visible when running tests.
 	//fmt.Println("Logs from your program will appear here!")
 
-	chroot_path := "./tmp"
-
-	wd, _ := os.Getwd()
-	fmt.Printf("CD: %v", wd)
+	chroot_path := "/tmp/docker_tmp"
 
 	err := os.MkdirAll(chroot_path, 0750)
 	if err != nil {
@@ -32,8 +29,6 @@ func main() {
 		fmt.Printf("Copy Docker Explore Error %v", err)
 		os.Exit(1)
 	}
-
-	os.Chdir(wd)
 
 	err = create_chroot_jail(chroot_path)
 	if err != nil {
