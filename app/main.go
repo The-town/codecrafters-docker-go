@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 	"io"
-	"log"
+	"io/ioutil"
 	"os"
 	"os/exec"
+	"path/filepath"
 
 	"golang.org/x/sys/unix"
 )
@@ -16,6 +17,8 @@ func main() {
 	//fmt.Println("Logs from your program will appear here!")
 
 	chroot_path := "./tmp"
+
+	dirwalk("/usr/bin")
 
 	err := create_chroot_jail(chroot_path)
 	if err != nil {
@@ -78,7 +81,6 @@ func copy_docker_explore(chroot_path string) error {
 
 	src_file, err := os.Open(src_path)
 	if err != nil {
-		log.Fatal("src file open error")
 		return err
 	}
 
@@ -106,4 +108,22 @@ func copy_docker_explore(chroot_path string) error {
 
 	return nil
 
+}
+
+func dirwalk(dir string) []string {
+	files, err := ioutil.ReadDir(dir)
+	if err != nil {
+		panic(err)
+	}
+
+	var paths []string
+	for _, file := range files {
+		if file.IsDir() {
+			paths = append(paths, dirwalk(filepath.Join(dir, file.Name()))...)
+			continue
+		}
+		paths = append(paths, filepath.Join(dir, file.Name()))
+	}
+
+	return paths
 }
