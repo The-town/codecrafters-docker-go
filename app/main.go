@@ -18,17 +18,17 @@ func main() {
 
 	chroot_path := "./tmp"
 
-	err := create_chroot_jail(chroot_path)
+	os.MkdirAll(chroot_path, 0750)
+
+	err := copy_docker_explore(chroot_path)
 	if err != nil {
-		fmt.Printf("Chroot Error %v", err)
+		fmt.Printf("Copy Docker Explore Error %v", err)
 		os.Exit(1)
 	}
 
-	fmt.Printf("%v", dirwalk("/usr/local/bin"))
-
-	err = copy_docker_explore(chroot_path)
+	err = create_chroot_jail(chroot_path)
 	if err != nil {
-		fmt.Printf("Copy Docker Explore Error %v", err)
+		fmt.Printf("Chroot Error %v", err)
 		os.Exit(1)
 	}
 
@@ -55,12 +55,7 @@ func main() {
 }
 
 func create_chroot_jail(path string) error {
-	err := os.MkdirAll(path, 0750)
-	if err != nil {
-		return err
-	}
-
-	err = unix.Chroot(path)
+	err := unix.Chroot(path)
 	if err != nil {
 		return err
 	}
