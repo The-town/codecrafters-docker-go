@@ -44,7 +44,6 @@ func main() {
 	cmd := exec.Command(command, args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	cmd.Dir = chroot_path
 
 	err = cmd.Run()
 
