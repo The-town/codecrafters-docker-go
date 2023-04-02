@@ -15,15 +15,16 @@ func main() {
 	//fmt.Println("Logs from your program will appear here!")
 
 	chroot_path := "./tmp"
-	err := copy_docker_explore(chroot_path)
+
+	err := create_chroot_jail(chroot_path)
 	if err != nil {
-		fmt.Printf("Copy Docker Explore Error %v", err)
+		fmt.Printf("Chroot Error %v", err)
 		os.Exit(1)
 	}
 
-	err = create_chroot_jail(chroot_path)
+	err = copy_docker_explore(chroot_path)
 	if err != nil {
-		fmt.Printf("Chroot Error %v", err)
+		fmt.Printf("Copy Docker Explore Error %v", err)
 		os.Exit(1)
 	}
 
