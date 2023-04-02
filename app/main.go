@@ -10,13 +10,6 @@ import (
 )
 
 // Usage: your_docker.sh run <image> <command> <arg1> <arg2> ...
-
-type nullReader struct{}
-type nullWriter struct{}
-
-func (nullReader) Read(p []byte) (n int, err error)  { return len(p), nil }
-func (nullWriter) Write(p []byte) (n int, err error) { return len(p), nil }
-
 func main() {
 	// You can use print statements as follows for debugging, they'll be visible when running tests.
 	//fmt.Println("Logs from your program will appear here!")
@@ -37,9 +30,8 @@ func main() {
 
 	//
 	cmd := exec.Command(command, args...)
-	cmd.Stdin = nullReader{}
-	cmd.Stdout = nullWriter{}
-	cmd.Stderr = nullWriter{}
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
 	cmd.Dir = chroot_path
 
 	err = cmd.Run()
@@ -61,6 +53,13 @@ func create_chroot_jail(path string) error {
 	}
 
 	err = unix.Chroot(path)
+	if err != nil {
+		return err
+	}
+
+	// Go言語の仕様としてchrootする際は/dev/nullが必要
+	// https://rohitpaulk.com/articles/cmd-run-dev-null
+	err = os.MkdirAll("/dev/null", 0750)
 	if err != nil {
 		return err
 	}
