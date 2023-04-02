@@ -21,9 +21,13 @@ func main() {
 	wd, _ := os.Getwd()
 	fmt.Printf("CD: %v", wd)
 
-	os.MkdirAll(chroot_path, 0750)
+	err := os.MkdirAll(chroot_path, 0750)
+	if err != nil {
+		fmt.Printf("Mkdir Error %v", err)
+		os.Exit(1)
+	}
 
-	err := copy_docker_explore(chroot_path)
+	err = copy_docker_explore(chroot_path)
 	if err != nil {
 		fmt.Printf("Copy Docker Explore Error %v", err)
 		os.Exit(1)
