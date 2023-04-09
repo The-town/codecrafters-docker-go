@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"syscall"
 
 	"golang.org/x/sys/unix"
 )
@@ -44,6 +45,9 @@ func main() {
 	cmd := exec.Command(command, args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+	cmd.SysProcAttr = &syscall.SysProcAttr{
+		Cloneflags: syscall.CLONE_NEWPID,
+	}
 
 	err = cmd.Run()
 
